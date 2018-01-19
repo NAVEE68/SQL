@@ -1,0 +1,117 @@
+                              Name of assignment    :      SQL-Computer Store
+
+
+create table manufacturers(code integer primary key,name varchar(30))
+
+create table products(code integer primary key,name varchar(30),price integer,manufacturer integer references manufacturers(code))
+
+insert into manufacturers values(1,'sony')
+insert into manufacturers values(2,'creative labs')
+insert into manufacturers values(3,'hewlett-packard')
+insert into manufacturers values(4,'iomega')
+insert into manufacturers values(5,'fujitsu')
+insert into manufacturers values(6,'winchester')
+
+
+
+select * from products 
+
+insert into products values(1,'hard drive',240,5)
+insert into products values(2,'memory',120,6)
+insert into products values(3,'zip drive',150,4)
+insert into products values(4,'floppy disk',5,6)
+insert into products values(5,'monitor',240,1)
+insert into products values(6,'dvd drive',180,2)
+insert into products values(7,'cd drive',90,2)
+insert into products values(8,'printer',270,3)
+
+insert into products values(9,'toner cartridge',66,3)
+insert into products values(10,'dvd burner',180,2)
+
+
+
+1.Select the names of all the products in the store.
+    select name as "All Products" from products
+
+
+
+2.Select the names and prices of all the products in the store.
+select initcap(name),price from products
+
+
+3.Select the names of the products with a price less than or equal to 200.
+select initcap(name) from products where price<=200
+
+
+4.Select all the products with a price between 60 and 120.
+select * from products where price between 60 and 120
+
+
+5.Select the name and price in cents.
+select initcap(name),price*100 as "Price in cents" from products
+
+
+6.Compute the average price of all the products.
+select round(avg(price),2) as "Average Price" from products
+
+
+7.Compute the average price of all the products with manufacturer code equal to 2.
+select round(avg(price),2) as "Average Price" from products where manufacturer=2
+
+
+8.Compute the number of products with a price larger than or equal to 180
+select count(name) as "Number of products" from products where price>=180
+
+
+9.select name and price of all the products with a price larger than or equal to 180 and sort first by price(descending) and then by name(ascending)
+select initcap(name),price from products where price>=180 order by price desc,name
+
+
+10.select all the data from the products ,including all the data for each product's manufacturer.
+select * from products , manufacturers
+where products.manufacturer=manufacturers.code
+
+
+11.Select product name,price and manufacturer name of all the products.
+select p.name as "Product name",price,m.name as "Manufacturer name" from products p,manufacturers m
+where p.manufacturer=m.code
+
+
+12.select the average price of each manufacturer's products, showing only the manufacturer's code.
+select avg(price),m.code "Manufacturers code" from products p,manufacturers m  where p.manufacturer=m.code group by m.code
+
+
+
+13.select the average price of each manufacturer's products, showing only the manufacturer's name.
+select avg(price),m.name as "Manufacturers name" from products p,manufacturers m  where p.manufacturer=m.code group by m.name
+
+
+
+14.Select the names of manufacturer whose products have an average price larger than or equal to 150.
+select m.name from  products p,manufacturers m where p.manufacturer=m.code and avg(price)>=150
+
+
+
+15.Select the name and price of cheapest product.
+select name from products where price=(select min(price) from products)
+
+
+
+16.select the name of each manufacturer along with name and price of its most expensive product.
+select name,price,manufacturer from products where price=(select max(price) from products)
+
+
+17.add a new product: Loudspeakers,70,manufacturer 2.
+insert into products values(11,'loudspeakers',240,2)
+
+
+18.Update the name of product 8 to laser printer.
+update products set name='laser printer' where code=8
+
+
+19.apply a 10% discount to all products.
+update products set price=(price-price*.1) 
+
+
+20.Apply 10% discount to all products with a price larger than or equal to 120.
+update products set price=(price-price*.1) where price>=120

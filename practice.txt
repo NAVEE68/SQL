@@ -1,0 +1,46 @@
+782;vijaya;india
+982;john;us
+1000;usha;nepal
+1000-usha-nepal
+782-vijaya india
+
+
+3.	List details of employees who have joined before 30 Sep 81
+select * from emp where hiredate<'30-sep-81'
+
+
+15.	Display Ename, Sal and Sal added with Comm from table Emp.
+select ename,sal,sal+nvl(comm,0) as "Commissioned salary" from emp 
+
+16.	Display EName joined with Job with heading “Employee”, Sal*12 as “Total Salary” from table Emp.
+select ename & job as "employee" from emp
+
+19.	Write a Query to display employee name, salary and department number who are not getting commission from table Emp.
+select ename,sal,deptno from emp where comm is null
+
+
+22.	Write a Query to display name, job, salary, and HireDate of employees who are hired between February 20, 1981, and May 1, 1981. Order the query in ascending order of HireDate.
+select ename,job,sal,hiredate from emp where hiredate between '20-feb-81' and '1-may-81'
+
+alter table emp drop column dob
+select * from emp
+
+desc emp
+select * from dept
+update emp set sal=sal+1000 where sal<1000
+
+
+select upper(dname) as "Upper" from dept
+3.	Write a query to display the First three letters from the Employee job column.
+select substr(job,1,3) from emp
+
+
+
+
+
+
+create table course(courseid number(5) primary key,coursename varchar(30),fees number(10,2))
+
+create table student(rollno number(5) primary key,studname varchar(30),dob date,city varchar(30),courseid number(5),foreign key(courseid ) references course)
+
+

@@ -1,0 +1,52 @@
+create table product(modelno number(5) primary key,maker varchar(30),type varchar(30))
+desc product
+insert into product values(1121,'B','PC')
+insert into product values(1232,'A','PC')
+insert into product values(1233,'A','PC')
+insert into product values(1260,'E','PC')
+insert into product values(1276,'A','PRINTER')
+insert into product values(1288,'D','PRINTER')
+insert into product values(1298,'A','LAPTOP')
+insert into product values(1321,'C','LAPTOP')
+
+
+insert into product values(1401,'A','PRINTER')
+insert into product values(1408,'A','PRINTER')
+insert into product values(1433,'D','PRINTER')
+insert into product values(1434,'E','PRINTER')
+insert into product values(1750,'B','LAPTOP')
+insert into product values(1752,'A','LAPTOP')
+insert into product values(2111,'E','PC')
+insert into product values(2112,'E','PC')
+insert into product values(4001,'Z','PC')
+insert into product values(4002,'Z','LAPTOP')
+insert into product values(4003,'Z','PRINTER')
+select * from product
+
+
+
+
+
+select extract(year from sysdate)from dual
+
+select sysdate from dual
+
+
+select ename,hiredate from emp where extract(year from hiredate)=1981
+
+select * from prod
+
+create view prod1(modelnumber,makeryaaru) as select modelno,type from product
+desc prod
+select modelno,maker from prod 
+select  * from prod1
+select modelnumber,makeryaaru from prod1
+
+create view prod2 as select * from product where type='PC'
+select * from prod3
+
+create view prod3(modelnumber) as select sum(modelno) from product group by type
+
+
+
+
